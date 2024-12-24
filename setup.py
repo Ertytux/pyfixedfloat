@@ -4,11 +4,7 @@ setup(
     name='pyfixedfloat',
     version='0.1',
     packages=find_packages(),
-    install_requires=[
-       ' requests'
-        # Aquí puedes listar las dependencias, por ejemplo:
-        # 'numpy',
-    ],
+    install_requires=[],
     author='Ertytux Tux',
     author_email='hivep2p@gmail.com',
     description='Paquete para el manejo de FixedFloat',

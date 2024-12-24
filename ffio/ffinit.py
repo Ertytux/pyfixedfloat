@@ -7,7 +7,7 @@ import requests
 
 
 class FFio:
-    def __init__(self, apikey: str, seckey: str,refcode:str,stdata:float):
+    def __init__(self, apikey: str, seckey: str,refcode=None,stdata=None):
         self.__apikey = apikey
         self.__seckey = seckey
         self.__refcode=refcode
@@ -36,7 +36,7 @@ class FFio:
         """
         return self.__request(method='ccies')
     
-    def expriceFloat(self,fr:str,tos:str,amount:float): 
+    def priceFloat(self,fr:str,tos:str,amount:float): 
         """
         Obtener el tipo de cambio de un par de divisas en la dirección 
         y el tipo de cambio seleccionados.
@@ -46,11 +46,45 @@ class FFio:
             'fromCcy':fr,
             'toCcy':tos,
             'direction':'from',
-            'amount':amount,
-            'refcode':self.__refcode,
-            'afftax':self.__stdata
+            'amount':amount            
             }
+        if self.__refcode:
+            data['refcode']=self.__refcode
+        if self.__stdata:
+            data['afftax']=self.__stdata
+
         return self.__request(method='price',params=data)
+    
+    def setOrder(self,fr:str,tos:str,amount:float,address:str): 
+        """
+        Crear una orden para el intercambio de monedas seleccionadas 
+        con una cantidad y dirección específicas.
+        """
+        data={
+            'type':'float',
+            'fromCcy':fr,
+            'toCcy':tos,
+            'direction':'from',
+            'amount':amount,
+            "toAddress":address            
+            }
+        if self.__refcode:
+            data['refcode']=self.__refcode
+        if self.__stdata:
+            data['afftax']=self.__stdata
+        
+        return self.__request(method='create',params=data)
+    
+    def getOrderInfo(self,id:str,token:str):
+        """
+        Recibe los datos de pedido actualizados.
+        """
+        data={
+            'id':id,
+            'token':token
+            }
+        return self.__request(method='order',params=data)
+    
         
         
     
