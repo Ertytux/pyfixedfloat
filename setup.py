@@ -4,7 +4,7 @@ setup(
     name='pyfixedfloat',
     version='0.1',
     packages=find_packages(),
-    install_requires=[],
+    install_requires=['requests'],
     author='Ertytux Tux',
     author_email='hivep2p@gmail.com',
     description='Paquete para el manejo de FixedFloat',
